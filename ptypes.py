@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import Enum, IntEnum
 
 class Suit(Enum):
     """Card suit"""
@@ -14,11 +14,12 @@ class Suit(Enum):
         elif self.name == self.DIAMOND.name: return "♦"
         elif self.name == self.CLUB.name: return "♣"
         else: return self.name
+        
     
     def __repr__(self) -> str:
         return self.char()
 
-class Rank(Enum):
+class Rank(IntEnum):
     """Card rank"""
     TWO = 2
     THREE = 3
@@ -35,7 +36,7 @@ class Rank(Enum):
     ACE = 14
     
     def __repr__(self) -> str:
-        return f"{self.value if self.value <= 10 else self.name[0]}"
+        return f"{self if self <= 10 else self.name[0]}"
 
 @dataclass(frozen = True)
 class Card:
