@@ -2,7 +2,7 @@ from ptypes import Card
 from typing import Callable
 
 class Player:
-    def __init__(self, is_bot: bool) -> None:
+    def __init__(self, is_bot: bool = True) -> None:
         self.cards: tuple[Card] | None = None
         self.stack: int = 0
         self.ev: float = 0.0

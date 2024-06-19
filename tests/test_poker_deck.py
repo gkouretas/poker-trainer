@@ -4,8 +4,8 @@ import unittest
 import sys
 sys.path.append("../")
 
-from deck import PokerDeck
-from player import Player
+from game.deck import PokerDeck
+from game.player import Player
 
 class TestPokerDeck(unittest.TestCase):
     def setUp(self):
