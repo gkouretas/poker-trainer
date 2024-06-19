@@ -1,7 +1,7 @@
 import numpy as np
 import copy
 
-from player import Player
+from game.player import Player
 from typing import Iterable, Optional
 from ptypes import Card, Rank, Suit
 
@@ -42,10 +42,10 @@ class PokerDeck:
 
     @property
     def board(self):
-        return self._board.copy()
+        return self._board
     
     def copy_board(self):
-        return copy.deepcopy(self._board)
+        return self._board.copy()
 
     def shuffle(self):
         rand_arr = np.arange(NUM_CARDS)

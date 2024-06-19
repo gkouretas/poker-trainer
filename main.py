@@ -1,15 +1,19 @@
-from deck import PokerDeck
-from player import Player
+from game.deck import PokerDeck
+from game.player import Player
+from game.table import PokerTable
+from ptypes import Blinds
 
 if __name__ == "__main__":
     deck = PokerDeck()
-    p1 = Player()
-    p2 = Player()
-    p3 = Player()
-    p4 = Player()
+    p1 = Player(is_bot = False)
+    p2 = Player(is_bot = True)
+    p3 = Player(is_bot = True)
+    p4 = Player(is_bot = True)
     
-    deck.deal((p1, p2, p3, p4))
-    print(deck)
-    print(p1, p2, p3, p4)
-    for _ in range(3):
-        print(deck.step())
+    p1.stack = 100
+    p2.stack = 75
+    p3.stack = 10
+    p4.stack = 50
+    
+    table = PokerTable([p1, p2, p3, p4], Blinds(1,2))
+    table.run()

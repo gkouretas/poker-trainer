@@ -46,3 +46,17 @@ class Card:
     
     def __repr__(self) -> str:
         return f"{self.rank.__repr__()}{self.suit.__repr__()}"
+    
+@dataclass
+class Blinds:
+    small: float
+    big: float
+    
+    def total(self): return self.small + self.big
+    
+class Action(IntEnum):
+    NULL = 0
+    FOLD = 1
+    CHECK = 2
+    CALL = 3
+    RAISE = 4
