@@ -11,7 +11,7 @@ class Player:
         self._is_bot = is_bot
         
     def __repr__(self) -> str:
-        return f"Player. Hand: {self.cards}. Stack: {self.stack}"
+        return f"{self.cards} ${self.stack}"
         
     def request_chips(self, validity_callback: Callable[[int], bool]) -> int:
         while True:

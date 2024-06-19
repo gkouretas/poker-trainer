@@ -24,6 +24,31 @@ class PokerTable:
         # Initialize button position
         self._button = 0
         
+        self._current_player = None
+        
+    def __repr__(self):
+        return self.generate_command_line_string()
+        
+    def generate_command_line_string(self):
+        WIDTH = 25
+
+        board = str("Board: " + str(self._deck.board)).center(WIDTH * len(self._players))
+        
+        active = ""
+        status = ""
+        ids = ""
+        players = ""
+        amounts = ""
+
+        for player in self._players:
+            active += str("ACTIVE" if id(player) == self._current_player else "").center(WIDTH)
+            status += str("✓" if id(player) in self._active_players else "X").center(WIDTH)
+            ids += str("Player " + hex(id(player))).center(WIDTH)
+            players += str(player).center(WIDTH)
+            amounts += str(player.amount).center(WIDTH)
+            
+        return "\n".join([board, active, status, ids, players, amounts])
+            
     @property
     def N(self): return len(self._active_players)
 
@@ -99,8 +124,9 @@ class PokerTable:
                 player = self.from_id(id)
                 
                 # Get player's action
-                print(f"Current bet size: {self._current_size}")
-                
+                self._current_player = id
+                print(self)
+
                 action = self.process_player_response(player.request_chips(self.is_valid), player.amount)
                 
                 assert action != Action.NULL, "Unexpected behavior"
@@ -118,7 +144,6 @@ class PokerTable:
                     request_action([subplayers[i]])
                                 
         while len(self._deck.board) < 5 and self.N > 1:
-            print(f"Board: {self._deck.board}")
             request_action(players)
             
             self.reset(players)
